@@ -44,14 +44,14 @@ jobs:
         ls
         pwd
         echo STEP_2
-        cd XamarinMaterialSample
+        echo -->cd XamarinMaterialSample
         echo STEP_3
         ls
         pwd
         echo STEP_4
         nuget restore
         echo STEP_4_2
-        cd ..
+        echo -->cd ..
         echo STEP_4_3
         ls
         pwd
