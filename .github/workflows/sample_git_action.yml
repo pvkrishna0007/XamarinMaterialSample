@@ -31,3 +31,16 @@ jobs:
         run: |
           echo Add mac other actions to build,
           echo test, and deploy your project.
+          
+  Android:
+    runs-on: macos-latest
+    
+    steps:
+    - uses: actions/checkout@v1
+      
+    - name: XamarinMaterialSample_Android
+      run: |
+        cd XamarinMaterialSample
+        nuget restore
+        cd XamarinMaterialSample.Android
+        msbuild XamarinMaterialSample.Android.csproj /verbosity:normal /t:Rebuild /p:Configuration=Debug
