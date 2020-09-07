@@ -3,5 +3,8 @@
     <StackLayout>
         <!-- Place new controls here -->
         <Label Text="Welcome to Xamarin.Forms Material Design...!" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" />
+        <Entry WidthRequest="300" Text="Krishna" Placeholder="Username" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" />
+        <Entry WidthRequest="300" Placeholder="Location" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" />
+        <Button Text="Krishna" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" />
     </StackLayout>
 </ContentPage>
