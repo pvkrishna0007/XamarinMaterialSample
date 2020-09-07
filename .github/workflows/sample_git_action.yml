@@ -63,8 +63,15 @@ jobs:
         echo STEP_7
         msbuild XamarinMaterialSample.Android.csproj /verbosity:normal /t:Rebuild /p:Configuration=Debug
         
-        echo STEP_8_APK_FILE_LOCATION
-        find . |grep ".apk"
+    - name: Android_Artifacts
+      run: |
+          mkdir -p apks
+          cp ${{env.SOLUTION_NAME}}/${{env.ANDROID_PROJECT_NAME}}/bin/Debug/*.apk apks
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v1
+      with:
+          name: apks
+          path: apks
         
   iOS:
     runs-on: macos-latest
