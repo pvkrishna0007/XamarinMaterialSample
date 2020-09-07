@@ -62,3 +62,15 @@ jobs:
         pwd
         echo STEP_7
         msbuild XamarinMaterialSample.Android.csproj /verbosity:normal /t:Rebuild /p:Configuration=Debug
+        
+  iOS:
+    runs-on: macos-latest
+    
+    steps:
+    - uses: actions/checkout@v1
+      
+    - name: XamarinMaterialSample_iOS
+      run: |
+        echo -->cd XamarinMaterialSample
+        nuget restore
+        msbuild XamarinMaterialSample.iOS/XamarinMaterialSample.iOS.csproj /verbosity:normal /t:Rebuild /p:Platform=iPhoneSimulator /p:Configuration=Debug
