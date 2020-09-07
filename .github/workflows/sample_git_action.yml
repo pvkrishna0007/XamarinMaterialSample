@@ -50,6 +50,11 @@ jobs:
         pwd
         echo STEP_4
         nuget restore
+        echo STEP_4_2
+        cd ..
+        echo STEP_4_3
+        ls
+        pwd
         echo STEP_5
         cd XamarinMaterialSample.Android
         echo STEP_6
