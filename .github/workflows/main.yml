@@ -1,0 +1,54 @@
+name: CI on Push and Pull Request XamarinMaterialSample_ANDROID_IOS
+
+on: 
+  push:
+    tags:
+    - '*'
+
+jobs:
+  Practice:
+
+    runs-on: macos-latest
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: Run a one-line script
+      run: echo Hello, world!
+    - name: Run a multi-line script
+      run: |
+        echo Add other actions to build,
+        echo test, and deploy your project.
+    - name: Show what in there
+      run: |
+        ls
+    - name: Show what it's inside
+      run: |
+        cd ..
+        ls
+  Android:
+
+    runs-on: macos-latest
+    
+    steps:
+
+    - uses: actions/checkout@v1
+      
+    - name: XamarinMaterialSample_Android
+      run: |
+        cd XamarinMaterialSample
+        nuget restore
+        cd XamarinMaterialSample.Android
+        msbuild XamarinMaterialSample.Android.csproj /verbosity:normal /t:Rebuild /p:Configuration=Debug
+  iOS:
+
+    runs-on: macos-latest
+    
+    steps:
+
+    - uses: actions/checkout@v1
+      
+    - name: XamarinMaterialSample_iOS
+      run: |
+        cd XamarinMaterialSample
+        nuget restore
+        msbuild XamarinMaterialSample.iOS/XamarinMaterialSample.iOS.csproj /verbosity:normal /t:Rebuild /p:Platform=iPhoneSimulator /p:Configuration=Debug
