@@ -13,6 +13,7 @@ on:
 env:
   SOLUTION_NAME:  XamarinMaterialSample
   ANDROID_PROJECT_NAME:  XamarinMaterialSample.Android
+  IOS_PROJECT_NAME:  XamarinMaterialSample.iOS
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -37,6 +38,7 @@ jobs:
           echo test, and deploy your project.
           echo ${{env.SOLUTION_NAME}}
           echo ${{env.ANDROID_PROJECT_NAME}}
+          echo ${{env.IOS_PROJECT_NAME}}
           
   Android:
     runs-on: macos-latest
@@ -46,47 +48,10 @@ jobs:
       
     - name: XamarinMaterialSample_Android
       run: |
-        echo STEP_1
-        ls
-        pwd
-        echo STEP_2
-        echo -->cd XamarinMaterialSample
-        echo STEP_3
-        ls
-        pwd
-        echo STEP_4
         nuget restore
-        echo STEP_4_2
-        echo -->cd ..
-        echo STEP_4_3
-        ls
-        pwd
-        echo STEP_5
-        cd XamarinMaterialSample.Android
-        echo STEP_6
-        ls
-        pwd
-        echo STEP_7
-        msbuild XamarinMaterialSample.Android.csproj /verbosity:normal /t:Rebuild /p:Configuration=Debug
+        cd ${{env.ANDROID_PROJECT_NAME}}
+        msbuild ${{env.ANDROID_PROJECT_NAME}}.csproj /verbosity:normal /t:Rebuild /p:Configuration=Debug
         
-  AndroidArt:
-    runs-on: macos-latest
-    
-    steps:
-    - uses: actions/checkout@v1
-    - name: Building APK
-      uses: ./action
-      with:
-        args: /r:True /t:SignAndroidPackage /p:AndroidSdkDirectory=/android/sdk ${{env.SOLUTION_NAME}}/${{env.ANDROID_PROJECT_NAME}}/${{env.ANDROID_PROJECT_NAME}}.csproj
-    - name: Artifacts
-      run: |
-        mkdir -p apks
-        cp ${{env.SOLUTION_NAME}}/${{env.ANDROID_PROJECT_NAME}}/bin/Debug/*.apk apks
-    - name: Upload Artifacts
-      uses: actions/upload-artifact@v1
-      with:
-        name: apks
-        path: apks
               
   iOS:
     runs-on: macos-latest
@@ -96,6 +61,5 @@ jobs:
       
     - name: XamarinMaterialSample_iOS
       run: |
-        echo -->cd XamarinMaterialSample
         nuget restore
-        msbuild XamarinMaterialSample.iOS/XamarinMaterialSample.iOS.csproj /verbosity:normal /t:Rebuild /p:Platform=iPhoneSimulator /p:Configuration=Debug
+        msbuild ${{env.IOS_PROJECT_NAME}}/${{env.IOS_PROJECT_NAME}}.csproj /verbosity:normal /t:Rebuild /p:Platform=iPhoneSimulator /p:Configuration=Debug
