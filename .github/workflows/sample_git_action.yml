@@ -40,7 +40,13 @@ jobs:
       
     - name: XamarinMaterialSample_Android
       run: |
+        ls
+        pwd
         cd XamarinMaterialSample
+        ls
+        pwd
         nuget restore
         cd XamarinMaterialSample.Android
+        ls
+        pwd
         msbuild XamarinMaterialSample.Android.csproj /verbosity:normal /t:Rebuild /p:Configuration=Debug
