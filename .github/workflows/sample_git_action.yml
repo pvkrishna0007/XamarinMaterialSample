@@ -63,6 +63,9 @@ jobs:
         echo STEP_7
         msbuild XamarinMaterialSample.Android.csproj /verbosity:normal /t:Rebuild /p:Configuration=Debug
         
+        echo STEP_8_APK_FILE_LOCATION
+        find . |grep ".apk"
+        
   iOS:
     runs-on: macos-latest
     
